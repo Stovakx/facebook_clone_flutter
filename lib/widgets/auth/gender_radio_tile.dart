@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 
 class GenderRadioTile extends StatelessWidget {
   const GenderRadioTile(
-      {Key? key,
+      {super.key,
       required this.genderText,
       required this.value,
       this.selectedValue,
-      this.onChanged})
-      : super(key: key);
+      this.onChanged});
 
   final String genderText;
   final String value;

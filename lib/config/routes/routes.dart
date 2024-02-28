@@ -1,6 +1,6 @@
 
+import 'package:facebook_clone_flutter/screens/error_screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application_1/screens/error_screen.dart';
 
 class Routes {
   static Route onGenerateRoute(RouteSettings settings) {

@@ -1,13 +1,13 @@
+import 'package:facebook_clone_flutter/config/constants/app_colors.dart';
+import 'package:facebook_clone_flutter/config/constants/constants.dart';
+import 'package:facebook_clone_flutter/widgets/auth/gender_radio_tile.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/config/constants/app_colors.dart';
-import 'package:flutter_application_1/config/constants/constants.dart';
-import 'package:flutter_application_1/widgets/auth/gender_radio_tile.dart';
+
 
 class GenderPicker extends StatelessWidget {
   final String? gender;
   final Function(String? value) onChanged;
-  const GenderPicker({Key? key, this.gender, required this.onChanged})
-      : super(key: key);
+  const GenderPicker({super.key, this.gender, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {

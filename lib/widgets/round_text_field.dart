@@ -8,14 +8,13 @@ class RoundTextField extends StatelessWidget {
   final TextInputAction textInputAction;
   final String? Function(String?)? validator;
   const RoundTextField(
-      {Key? key,
+      {super.key,
       required this.controller,
       required this.hintText,
       this.isPW = false,
       this.keyboardType = TextInputType.text,
       required this.textInputAction,
-      this.validator})
-      : super(key: key);
+      this.validator});
 
   @override
   Widget build(BuildContext context) {

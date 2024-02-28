@@ -1,19 +1,21 @@
 import 'dart:io';
+import 'package:facebook_clone_flutter/config/auth/validation.dart';
+import 'package:facebook_clone_flutter/config/constants/app_colors.dart';
+import 'package:facebook_clone_flutter/config/constants/constants.dart';
+import 'package:facebook_clone_flutter/screens/login_screen.dart';
+import 'package:facebook_clone_flutter/utils/utils.dart';
+import 'package:facebook_clone_flutter/widgets/auth/auth_text.dart';
+import 'package:facebook_clone_flutter/widgets/auth/birthday_picker.dart';
+import 'package:facebook_clone_flutter/widgets/auth/gender_picker.dart';
+import 'package:facebook_clone_flutter/widgets/pick_image.dart';
+import 'package:facebook_clone_flutter/widgets/round_text_field.dart';
+import 'package:facebook_clone_flutter/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/config/auth/validation.dart';
-import 'package:flutter_application_1/config/constants/app_colors.dart';
-import 'package:flutter_application_1/config/constants/constants.dart';
-import 'package:flutter_application_1/utils/utils.dart';
-import 'package:flutter_application_1/widgets/auth/birthday_picker.dart';
-import 'package:flutter_application_1/widgets/auth/gender_picker.dart';
-import 'package:flutter_application_1/widgets/pick_image.dart';
-import 'package:flutter_application_1/widgets/round_text_field.dart';
-import 'package:flutter_application_1/widgets/rounded_button.dart';
 
 final _formKey = GlobalKey<FormState>();
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -145,7 +147,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       isPW: true,
                     ),
                     const SizedBox(height: 20),
-                    RoundedButton(text: "Next", onPressed: (){},)
+                    RoundedButton(
+                      text: "Next",
+                      onPressed: () {},
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    
                   ],
                 ))),
       ),

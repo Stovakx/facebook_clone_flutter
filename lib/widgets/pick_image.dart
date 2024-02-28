@@ -1,10 +1,10 @@
 import 'dart:io';
+import 'package:facebook_clone_flutter/config/constants/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/config/constants/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PickImage extends StatelessWidget {
-  const PickImage({Key? key, this.image}) : super(key: key);
+  const PickImage({super.key, this.image});
   final File? image;
   @override
   Widget build(BuildContext context) {

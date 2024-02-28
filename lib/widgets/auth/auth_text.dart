@@ -7,23 +7,22 @@ class AuthText extends StatelessWidget {
   final VoidCallback? onTap;
 
   const AuthText(
-      {Key? key,
+      {super.key,
       required this.hintText,
       required this.clickableText,
-      this.onTap})
-      : super(key: key);
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(hintText),
+        Text(hintText, style: const TextStyle(fontSize: 18),),
         const SizedBox(
           width: 10,
         ),
         GestureDetector(
           onTap: onTap,
-          child: Text(clickableText),
+          child: Text(clickableText, style: const TextStyle(decoration: TextDecoration.underline,fontSize: 18, fontWeight: FontWeight.w600),),
         )
       ],
     );
