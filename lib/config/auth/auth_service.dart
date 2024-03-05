@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:facebook_clone_flutter/config/constants/firebase_collectionNames.dart';
+import 'package:facebook_clone_flutter/config/constants/firebase_collection_names.dart';
 import 'package:facebook_clone_flutter/config/constants/firebase_storage_folder_name.dart';
 import 'package:facebook_clone_flutter/models/user.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -47,11 +47,13 @@ class AuthService {
     required File? image,
   }) async {
     try {
-      //create acc in firebase
+      // create an account in firebase
       final credential = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
 
-      //storage for profile pics
+      // Save image to firebase storage
       final path = _storage
           .ref(StorageFolderNames.profilePic)
           .child(FirebaseAuth.instance.currentUser!.uid);
@@ -61,25 +63,28 @@ class AuthService {
       }
 
       final taskSnapshot = await path.putFile(image);
-      final downloadURL = await taskSnapshot.ref.getDownloadURL();
+      final downloadUrl = await taskSnapshot.ref.getDownloadURL();
 
       UserModel user = UserModel(
-          fullName: fullName,
-          birthDay: birthday,
-          gender: gender,
-          email: email,
-          password: password,
-          profilePicUrl: downloadURL,
-          uid: FirebaseAuth.instance.currentUser!.uid,
-          friends: const [],
-          sentRequests: const [],
-          receivedRequests: const []);
+        fullName: fullName,
+        birthDay: birthday,
+        gender: gender,
+        email: email,
+        password: password,
+        profilePicUrl: downloadUrl,
+        uid: FirebaseAuth.instance.currentUser!.uid,
+        friends: const [],
+        sentRequests: const [],
+        receivedRequests: const [],
+      );
 
-      //uložení do firestore
+      // save user to firestore
       await _fireStore
           .collection(FirebaseCollectionNames.users)
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .set(user.toMap());
+          .set(
+            user.toMap(),
+          );
 
       return credential;
     } catch (e) {
@@ -89,18 +94,19 @@ class AuthService {
   }
 
   //potvrzení emailu
-  Future<String?> verifyEmail(String email) async {
+    Future<String?> verifyEmail() async {
     final user = FirebaseAuth.instance.currentUser;
-
     try {
       if (user != null) {
         user.sendEmailVerification();
       }
-    } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
       return null;
+    } catch (e) {
+       Fluttertoast.showToast(msg: e.toString());
+      return e.toString();
     }
   }
+
 
   //získat user info
   Future<UserModel> getUserInfo() async {

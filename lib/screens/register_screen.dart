@@ -2,35 +2,38 @@ import 'dart:io';
 import 'package:facebook_clone_flutter/config/auth/validation.dart';
 import 'package:facebook_clone_flutter/config/constants/app_colors.dart';
 import 'package:facebook_clone_flutter/config/constants/constants.dart';
+import 'package:facebook_clone_flutter/config/provider/auth_provider.dart';
 import 'package:facebook_clone_flutter/utils/utils.dart';
 import 'package:facebook_clone_flutter/widgets/auth/birthday_picker.dart';
 import 'package:facebook_clone_flutter/widgets/auth/gender_picker.dart';
 import 'package:facebook_clone_flutter/widgets/pick_image.dart';
 import 'package:facebook_clone_flutter/widgets/round_text_field.dart';
 import 'package:facebook_clone_flutter/widgets/rounded_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final _formKey = GlobalKey<FormState>();
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
   static const routeName = '/registerScreen';
-  
+
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   late final TextEditingController _firstNameController;
   late final TextEditingController _lastNameController;
   late final TextEditingController _emailController;
   late final TextEditingController _pwController;
   late final TextEditingController _pwConfirmedController;
 
-
   File? image;
   DateTime? birthday;
   String gender = "Male";
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -50,6 +53,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _pwController.dispose();
     _pwConfirmedController.dispose();
     super.dispose();
+  }
+
+  Future<void> createUser() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      setState(() => isLoading = true);
+      await ref
+          .read(authProvider)
+          .regtisterIn(
+            fullName: '${_firstNameController.text} ${_lastNameController.text}',
+            birthday: birthday ?? DateTime.now(),
+            gender: gender,
+            email: _emailController.text,
+            password: _pwConfirmedController.text,
+            image: image,
+          )
+          .then((credential) {
+        if (!credential!.user!.emailVerified) {
+          Navigator.pop(context);
+        }
+      }).catchError((_) {
+        setState(() => isLoading = false);
+      });
+      setState(() => isLoading = false);
+    }
   }
 
   @override
@@ -147,14 +175,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       isPW: true,
                     ),
                     const SizedBox(height: 20),
-                    RoundedButton(
-                      text: "Next",
-                      onPressed: () {},
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    
+                    isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : RoundedButton(
+                            text: "Next",
+                            onPressed: createUser,
+                          ),
                   ],
                 ))),
       ),

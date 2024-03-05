@@ -7,13 +7,14 @@ import 'package:facebook_clone_flutter/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(child:  MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -35,12 +36,12 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               final user = snapshot.data;
               if (user!.emailVerified) {
-                return HomeScreen();
+                return const HomeScreen();
               } else {
-                return EmailVeritificationScreen();
+                return const EmailVeritificationScreen();
               }
             }
-            return LoginScreen();
+            return const LoginScreen();
           }),
           
     );
