@@ -2,9 +2,7 @@ import 'dart:io';
 import 'package:facebook_clone_flutter/config/auth/validation.dart';
 import 'package:facebook_clone_flutter/config/constants/app_colors.dart';
 import 'package:facebook_clone_flutter/config/constants/constants.dart';
-import 'package:facebook_clone_flutter/screens/login_screen.dart';
 import 'package:facebook_clone_flutter/utils/utils.dart';
-import 'package:facebook_clone_flutter/widgets/auth/auth_text.dart';
 import 'package:facebook_clone_flutter/widgets/auth/birthday_picker.dart';
 import 'package:facebook_clone_flutter/widgets/auth/gender_picker.dart';
 import 'package:facebook_clone_flutter/widgets/pick_image.dart';
@@ -16,7 +14,8 @@ final _formKey = GlobalKey<FormState>();
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
-
+  static const routeName = '/registerScreen';
+  
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
@@ -27,6 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late final TextEditingController _emailController;
   late final TextEditingController _pwController;
   late final TextEditingController _pwConfirmedController;
+
 
   File? image;
   DateTime? birthday;

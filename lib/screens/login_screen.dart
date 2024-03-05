@@ -93,13 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           hintText: "Don't have acount?",
                           clickableText: "Register here",
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisterScreen()));
-                            _emailController.clear();
-                            _pwController.clear();
+                            Navigator.pushNamed(context, RegisterScreen.routeName);
                           },
                         ),
                       ],
@@ -109,8 +103,8 @@ class _LoginScreenState extends State<LoginScreen> {
             Column(
               children: [
                 Image.asset(
-                  'assets/icons/meta_logo.png',
-                  height: 50,
+                  'assets/icons/meta.png',
+                  height: 60,
                 )
               ],
             )
