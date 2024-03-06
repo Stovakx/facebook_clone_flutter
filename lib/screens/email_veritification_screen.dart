@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-//TODO: Postavit to tak, aby klient musel napsat heslo nebo přes link by ho to hodilo do aplikace a potvrdilo mu to, 
-//že je email potvrzený, nebo opsat kód, či něco takového
 class EmailVeritificationScreen extends ConsumerWidget {
   const EmailVeritificationScreen({super.key});
 

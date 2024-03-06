@@ -1,4 +1,5 @@
 import 'package:facebook_clone_flutter/config/constants/app_colors.dart';
+import 'package:facebook_clone_flutter/config/constants/constants.dart';
 import 'package:facebook_clone_flutter/widgets/round_icon_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,17 +14,45 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  late final TabController _tabController;
+
+  @override
+  void initState(){
+    _tabController = TabController(length: 5, vsync: this);
+    super.initState();
+  }
+
+@override
+  void dispose(){
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.greyColor,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: AppColors.whiteColor,
-        title: _buildFacebookText(),
-        actions: [
-          _buildSearchWidget(),
-         _buildMessengerWidget()],
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        backgroundColor: AppColors.greyColor,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: AppColors.whiteColor,
+          title: _buildFacebookText(),
+          actions: [
+            _buildSearchWidget(),
+           _buildMessengerWidget()],
+           bottom: TabBar(tabs: Constants.getHomeScreenTabs(_tabController.index),
+           controller: _tabController,
+           onTap: (index){
+            setState(() {
+              
+            });
+           },),
+        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: Constants.screens,
+        ),
       ),
     );
   }
