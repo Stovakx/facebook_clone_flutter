@@ -1,23 +1,27 @@
 import 'package:facebook_clone_flutter/config/constants/app_colors.dart';
 import 'package:facebook_clone_flutter/config/constants/constants.dart';
+import 'package:facebook_clone_flutter/config/provider/auth_provider.dart';
 import 'package:facebook_clone_flutter/screens/register_screen.dart';
 import 'package:facebook_clone_flutter/widgets/auth/auth_text.dart';
 import 'package:facebook_clone_flutter/widgets/round_text_field.dart';
 import 'package:facebook_clone_flutter/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final _formKey = GlobalKey<FormState>();
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   late final TextEditingController _emailController;
   late final TextEditingController _pwController;
+
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -31,6 +35,17 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailController.dispose();
     _pwController.dispose();
     super.dispose();
+  }
+
+  Future<void> login() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      setState(() => isLoading =true);
+      await ref
+          .read(authProvider)
+          .signIn(email: _emailController.text, password: _pwController.text);
+      setState(() => isLoading = false);
+    }
   }
 
   @override
@@ -49,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
               "assets/icons/fb_logo.png",
               width: 60,
             ),
+            const SizedBox(height: 10,),
             Form(
                 key: _formKey,
                 child: Column(
@@ -80,10 +96,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         )
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     RoundedButton(
                       text: "Login",
-                      onPressed: () {},
+                      onPressed: login,
                     ),
                     const SizedBox(height: 10),
                     Row(
@@ -93,7 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           hintText: "Don't have acount?",
                           clickableText: "Register here",
                           onTap: () {
-                            Navigator.pushNamed(context, RegisterScreen.routeName);
+                            Navigator.pushNamed(
+                                context, RegisterScreen.routeName);
                           },
                         ),
                       ],

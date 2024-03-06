@@ -18,7 +18,7 @@ class AuthService {
     required String password,
   }) async {
     try {
-      final credential = await _auth.createUserWithEmailAndPassword(
+      final credential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       return credential;
     } catch (e) {
@@ -94,7 +94,7 @@ class AuthService {
   }
 
   //potvrzení emailu
-    Future<String?> verifyEmail() async {
+  Future<String?> verifyEmail() async {
     final user = FirebaseAuth.instance.currentUser;
     try {
       if (user != null) {
@@ -102,11 +102,10 @@ class AuthService {
       }
       return null;
     } catch (e) {
-       Fluttertoast.showToast(msg: e.toString());
+      Fluttertoast.showToast(msg: e.toString());
       return e.toString();
     }
   }
-
 
   //získat user info
   Future<UserModel> getUserInfo() async {

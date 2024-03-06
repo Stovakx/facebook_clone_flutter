@@ -18,6 +18,7 @@ class EmailVeritificationScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
+        actions: [IconButton(onPressed:() {ref.read(authProvider).singOut();}, icon: const Icon(Icons.logout))],
       ),
       body: Padding(
         padding: Constants.defaultPadding,

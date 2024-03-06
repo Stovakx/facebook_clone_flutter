@@ -9,7 +9,6 @@ import 'package:facebook_clone_flutter/widgets/auth/gender_picker.dart';
 import 'package:facebook_clone_flutter/widgets/pick_image.dart';
 import 'package:facebook_clone_flutter/widgets/round_text_field.dart';
 import 'package:facebook_clone_flutter/widgets/rounded_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

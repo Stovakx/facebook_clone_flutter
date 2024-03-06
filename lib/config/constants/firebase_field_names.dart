@@ -17,6 +17,7 @@ class FirebaseFieldNames {
   static const String likes = 'likes';
   static const String profilePicUrl = 'profile_pic_url';
   static const String createdAt = 'created_at';
+  static const String updatedAt = 'updated_at';
   static const String authorId = 'author_id';
   static const String commentId = 'comment_id';
   static const String text = 'text';
