@@ -1,3 +1,4 @@
+import 'package:facebook_clone_flutter/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 
 class Constants {
@@ -52,9 +53,7 @@ class Constants {
 
    static const List<Widget> screens = [
     
-    Center(
-      child: Text('Home Screen'),
-    ),
+    PostsScreen(),
     Center(
       child: Text('Friends Screen'),
     ),

@@ -1,5 +1,6 @@
 import 'package:facebook_clone_flutter/config/constants/app_colors.dart';
 import 'package:facebook_clone_flutter/config/constants/constants.dart';
+import 'package:facebook_clone_flutter/screens/create_post_screen.dart';
 import 'package:facebook_clone_flutter/widgets/posts/round_profile_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,7 +12,9 @@ class MakePost extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, CreatePostScreen.routeName);
+        },
         child: Container(
           color: Colors.white,
           child: Padding(
@@ -19,11 +22,16 @@ class MakePost extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                //TODO: předělat na uživatelovou profilovku(přihlášeného)
                 const RoundProfileTile(url: Constants.maleProfilePic),
                 _buildPostTextField(),
-                const Padding(padding: EdgeInsets.all(12),
-                child: Icon(FontAwesomeIcons.solidImages,
-                color: Colors.green,),)
+                const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Icon(
+                    FontAwesomeIcons.solidImages,
+                    color: Colors.green,
+                  ),
+                )
               ],
             ),
           ),
@@ -32,7 +40,7 @@ class MakePost extends StatelessWidget {
     );
   }
 
-    _buildPostTextField() {
+  _buildPostTextField() {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),

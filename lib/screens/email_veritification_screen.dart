@@ -42,6 +42,7 @@ class EmailVeritificationScreen extends ConsumerWidget {
                 final emailVerified =
                     FirebaseAuth.instance.currentUser?.emailVerified;
                 if (emailVerified == true) {
+                  if (!context.mounted) return;
                   Navigator.pushNamed(context, HomeScreen.routeName);
                 }
               },

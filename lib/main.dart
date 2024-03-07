@@ -1,4 +1,5 @@
 import 'package:facebook_clone_flutter/config/routes/routes.dart';
+import 'package:facebook_clone_flutter/config/themes/app_theme.dart';
 import 'package:facebook_clone_flutter/firebase_options.dart';
 import 'package:facebook_clone_flutter/screens/email_veritification_screen.dart';
 import 'package:facebook_clone_flutter/screens/home_screen.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: AppTheme.appTheme(),
       onGenerateRoute: Routes.onGenerateRoute,
       debugShowCheckedModeBanner: false,
       title: 'Facebook clone',

@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       child: Scaffold(
         backgroundColor: AppColors.greyColor,
         appBar: AppBar(
+          elevation: 0,
           automaticallyImplyLeading: false,
           backgroundColor: AppColors.whiteColor,
           title: _buildFacebookText(),
@@ -44,9 +45,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
            bottom: TabBar(tabs: Constants.getHomeScreenTabs(_tabController.index),
            controller: _tabController,
            onTap: (index){
-            setState(() {
-              
-            });
+            setState(() {});
            },),
         ),
         body: TabBarView(
