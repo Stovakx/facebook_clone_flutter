@@ -117,4 +117,19 @@ class AuthService {
     final user = UserModel.fromMap(userData.data()!);
     return user;
   }
+
+  //current user data
+  Future<UserModel> getCurrentUserInfo() async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw Exception('You are not loged in.');
+    }
+    final userData = await _fireStore
+        .collection(FirebaseCollectionNames.users)
+        .doc(user.uid)
+        .get();
+
+    final currentUser = UserModel.fromMap(userData.data()!);
+    return currentUser;
+  }
 }
