@@ -6,7 +6,7 @@ const PostsScreen({ super.key });
 
   @override
   Widget build(BuildContext context){
-    return CustomScrollView(
+    return const CustomScrollView(
       slivers: [
         MakePost(),
         

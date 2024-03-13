@@ -21,7 +21,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // i když jsem vymazal Theme, tak mi na nějakých místech objevuje jako je v základním nastaví při vytvoření app(fialová)
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

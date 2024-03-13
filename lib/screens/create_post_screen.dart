@@ -19,6 +19,7 @@ class CreatePostScreen extends StatefulWidget {
 class _CreatePostScreenState extends State<CreatePostScreen> {
   late final TextEditingController _postController;
   late Future<UserModel> _currentUser;
+  String FileType = "image";
   File? file;
 
   @override
@@ -63,173 +64,188 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               ))
         ],
       ),
-      body: Padding(
-        padding: Constants.defaultPadding,
-        child: Column(
-          children: [
-            FutureBuilder<UserModel>(
-              future: _currentUser,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final UserModel user = snapshot.data!;
-                  return Row(
-                    children: [
-                      RoundProfileTile(url: user.profilePicUrl),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            user.fullName,
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 5),
-                                  decoration: BoxDecoration(
-                                      color: AppColors.blueColor,
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      FaIcon(
-                                        FontAwesomeIcons.userGroup,
-                                        size: 18,
-                                        color: AppColors.whiteColor,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        "Friends",
-                                        style: TextStyle(
-                                            color: AppColors.whiteColor),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      FaIcon(
-                                        FontAwesomeIcons.caretDown,
-                                        size: 15,
-                                        color: AppColors.whiteColor,
-                                      )
-                                    ],
-                                  ),
+      body: Column(
+        children: [
+          FutureBuilder<UserModel>(
+            future: _currentUser,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final UserModel user = snapshot.data!;
+                return Row(
+                  children: [
+                    RoundProfileTile(url: user.profilePicUrl),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          user.fullName,
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 5),
+                                decoration: BoxDecoration(
+                                    color: AppColors.blueColor,
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: const Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.userGroup,
+                                      size: 18,
+                                      color: AppColors.whiteColor,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "Friends",
+                                      style: TextStyle(
+                                          color: AppColors.whiteColor),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    FaIcon(
+                                      FontAwesomeIcons.caretDown,
+                                      size: 15,
+                                      color: AppColors.whiteColor,
+                                    )
+                                  ],
                                 ),
                               ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 5),
-                                  decoration: BoxDecoration(
-                                      color: AppColors.blueColor,
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      FaIcon(
-                                        FontAwesomeIcons.plus,
-                                        size: 18,
-                                        color: AppColors.whiteColor,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        "Album",
-                                        style: TextStyle(
-                                            color: AppColors.whiteColor),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      FaIcon(
-                                        FontAwesomeIcons.caretDown,
-                                        size: 15,
-                                        color: AppColors.whiteColor,
-                                      )
-                                    ],
-                                  ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 5),
+                                decoration: BoxDecoration(
+                                    color: AppColors.blueColor,
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: const Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.plus,
+                                      size: 18,
+                                      color: AppColors.whiteColor,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "Album",
+                                      style: TextStyle(
+                                          color: AppColors.whiteColor),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    FaIcon(
+                                      FontAwesomeIcons.caretDown,
+                                      size: 15,
+                                      color: AppColors.whiteColor,
+                                    )
+                                  ],
                                 ),
                               ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 5),
-                                  decoration: BoxDecoration(
-                                      color: AppColors.blueColor,
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      FaIcon(
-                                        FontAwesomeIcons.instagram,
-                                        size: 18,
-                                        color: AppColors.whiteColor,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        "Off",
-                                        style: TextStyle(
-                                            color: AppColors.whiteColor),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      FaIcon(
-                                        FontAwesomeIcons.caretDown,
-                                        size: 15,
-                                        color: AppColors.whiteColor,
-                                      )
-                                    ],
-                                  ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 5),
+                                decoration: BoxDecoration(
+                                    color: AppColors.blueColor,
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: const Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.instagram,
+                                      size: 18,
+                                      color: AppColors.whiteColor,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "Off",
+                                      style: TextStyle(
+                                          color: AppColors.whiteColor),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    FaIcon(
+                                      FontAwesomeIcons.caretDown,
+                                      size: 15,
+                                      color: AppColors.whiteColor,
+                                    )
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              },
-            ),
-            const SizedBox(
-                  height: 20,
-                ),
-            const Row(
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
+          ),
+          const SizedBox(
+                height: 20,
+              ),
+           Padding(
+             padding: Constants.defaultPadding,
+             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 
-
+                TextField(
+                  controller: _postController,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'What\'s on your mind?',
+                    hintStyle: TextStyle(
+                      fontSize: 18,
+                      color: AppColors.darkGreyColor,
+                    ),
+                  ),
+                  keyboardType: TextInputType.multiline,
+                  minLines: 1,
+                  maxLines: 12,
+                  maxLength: 220,
+                  
+                )
               ],
-            )
-          ],
-        ),
+                       ),
+           )
+        ],
       ),
     );
   }
